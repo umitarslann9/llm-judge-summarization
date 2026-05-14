@@ -1,0 +1,50 @@
+# ============================================================
+# CENG 467 Term Project – Large vs. Small LLMs as Evaluators
+# Python 3.10+   |   install with:  pip install -r requirements.txt
+# ============================================================
+# Versions are pinned for reproducibility. If you change one,
+# note it in the commit message so results stay traceable.
+
+# ---- Dataset access (Stage 1: data/) ------------------------
+datasets==2.19.0          # loads mteb/summeval from the Hugging Face Hub
+huggingface-hub==0.23.0   # hub auth / download backend for `datasets`
+
+# ---- Core numerics & data handling --------------------------
+numpy==1.26.4
+pandas==2.2.2             # building/holding the score tables in results/
+scipy==1.13.0             # Spearman, Kendall-tau, Pearson (eval/correlation.py)
+
+# ---- Baseline 1: ROUGE --------------------------------------
+rouge-score==0.1.2        # ROUGE-1 / ROUGE-2 / ROUGE-L
+
+# ---- Baseline 2: BERTScore ----------------------------------
+bert-score==0.3.13        # embedding-based semantic similarity
+
+# ---- Small judge + zero-shot baseline (Stage 3: local model)-
+torch==2.3.0              # backend for transformers; install the CUDA build if on GPU
+transformers==4.41.0      # runs Qwen2.5 locally (judge/backend_local.py)
+accelerate==0.30.1        # device placement / efficient loading for large local models
+sentencepiece==0.2.0      # tokenizer dependency for Qwen2.5
+einops==0.8.0             # required by some Qwen model code paths
+
+# ---- Large judge (Stage 4: API backends) --------------------
+# Only the provider you set in config.yaml is actually used at runtime;
+# both are listed so either backend works out of the box.
+openai==1.30.1            # GPT-4 family   (judge/backend_api.py)
+anthropic==0.28.0         # Claude family  (judge/backend_api.py)
+
+# ---- Config & utilities -------------------------------------
+pyyaml==6.0.1             # reads config.yaml
+tqdm==4.66.4              # progress bars for the judge / baseline loops
+tenacity==8.3.0           # retry logic for API calls and malformed-output handling
+
+# ---- Plotting (Stage 5: cost-vs-quality figures) ------------
+matplotlib==3.8.4         # cost / quality trade-off plots in results/
+
+# ---- Notes --------------------------------------------------
+# * GPU: install the CUDA build of torch that matches your driver, e.g.
+#     pip install torch==2.3.0 --index-url https://download.pytorch.org/whl/cu121
+#   The CPU wheel above is enough for ROUGE and all eval/ scripts.
+# * bert-score downloads its encoder model on first run – expect a one-time delay.
+# * No API key goes in this file or in config.yaml – keys are read from
+#   environment variables (OPENAI_API_KEY / ANTHROPIC_API_KEY).
