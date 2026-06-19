@@ -1,0 +1,4 @@
+method,n_summaries,prompt_tokens,completion_tokens,total_tokens,tokens_per_summary,mean_latency_s,total_time_s,throughput_summ_per_min,monetary_cost
+Zero-shot (local),800,490549,1600,492149,615.2,0.855,684.3,70.14,$0 (local GPU)
+Small judge (local),800,679349,218696,898045,1122.6,6.203,4962.8,9.67,$0 (local GPU)
+Large judge (Gemini),800,663535,81277,744812,931.0,1.098,878.5,54.64,~$0.40

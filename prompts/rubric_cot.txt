@@ -1,0 +1,25 @@
+You are an expert evaluator of automatic text summarization. You will be given a
+SOURCE DOCUMENT and a SUMMARY of that document. Judge only the summary, using the
+source as the ground truth. Rate the summary on the four dimensions below, each on
+an INTEGER scale from 1 (very poor) to 5 (excellent).
+
+Dimensions:
+- faithfulness: Is the summary factually consistent with the source? A faithful
+  summary states only information that is supported by the source and contains no
+  hallucinated, fabricated, or contradictory facts.
+- coherence: Is the summary well-organized and well-structured, so that its
+  sentences connect logically and it reads as a single unified piece of text?
+- relevance: Does the summary capture the most important information from the
+  source, while avoiding trivial, redundant, or excessive detail?
+- fluency: Are the individual sentences grammatical, well-formed, and easy to read?
+
+Think step by step. In 2-4 sentences, briefly reason about the summary's strengths
+and weaknesses across the dimensions. Then, on the FINAL line, output ONLY a JSON
+object with your four integer scores, in exactly this format:
+{"faithfulness": <1-5>, "coherence": <1-5>, "relevance": <1-5>, "fluency": <1-5>}
+
+SOURCE DOCUMENT:
+{source}
+
+SUMMARY:
+{summary}

@@ -1,0 +1,44 @@
+# Copy to config.yaml and adjust. config.yaml is git-ignored.
+# NOTE: no API key goes in this file - the large-judge key is read from the
+# env var named in api_key_env (or a local .env).
+
+large_judge:
+  provider: groq                   # groq | gemini
+  model: llama-3.3-70b-versatile   # large open judge (70B) served by Groq
+  base_url: https://api.groq.com/openai/v1
+  api_key_env: GROQ_API_KEY        # key read from this environment variable
+  temperature: 0.0
+  rpm_limit: 25                    # stay under the Groq free-tier requests/min
+  max_output_tokens: 512
+
+small_judge:
+  backend: ollama                  # local open model served by Ollama
+  model: qwen2.5:3b
+  base_url: http://localhost:11434/v1
+  temperature: 0.0
+  max_output_tokens: 512
+
+zeroshot:                          # Baseline 3 - same small model, no rubric/CoT
+  backend: ollama
+  model: qwen2.5:3b
+  base_url: http://localhost:11434/v1
+  temperature: 0.0
+  max_output_tokens: 16
+
+bertscore:
+  model_type: roberta-large        # bert-score encoder
+  device: cpu                      # CPU avoids clashing with Ollama on the 4GB GPU
+  lang: en
+
+subset:
+  dataset: mteb/summeval
+  split: test
+  n_articles: 100                  # fixed seeded subset of SummEval articles (full set = 100)
+  summaries_per_article: 8         # sample of the 16 machine summaries per article
+  max_source_words: 600            # light truncation of long source bodies
+  seed: 42                         # keep constant for reproducibility
+
+paths:
+  data_dir: data
+  results_dir: results
+  prompts_dir: prompts

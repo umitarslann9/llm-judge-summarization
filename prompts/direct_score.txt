@@ -1,0 +1,11 @@
+Rate the overall quality of the following SUMMARY of the given DOCUMENT on an
+integer scale from 1 (very poor) to 5 (excellent). Respond with ONLY the single
+number and nothing else.
+
+DOCUMENT:
+{source}
+
+SUMMARY:
+{summary}
+
+Score:

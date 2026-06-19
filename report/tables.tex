@@ -1,0 +1,69 @@
+\begin{table}[t]
+\centering
+\caption{Spearman correlation of each method with SummEval human ratings, per dimension. Avg.\ columns report the mean Spearman ($\rho$) and Kendall ($\tau$) across the four dimensions. LLM judges in bold.}
+\label{tab:correlation}
+\begin{tabular}{lcccccc}
+\toprule
+Method & Coh. & Cons. & Flu. & Rel. & Avg.\,$\rho$ & Avg.\,$\tau$ \\
+\midrule
+ROUGE-1 & 0.214 & 0.186 & 0.102 & 0.313 & 0.204 & 0.151 \\
+ROUGE-2 & 0.144 & 0.150 & 0.076 & 0.221 & 0.148 & 0.109 \\
+ROUGE-L & 0.212 & 0.153 & 0.078 & 0.230 & 0.168 & 0.124 \\
+BERTScore-F & 0.385 & 0.075 & 0.092 & 0.373 & 0.231 & 0.169 \\
+Zero-shot & 0.296 & 0.238 & 0.232 & 0.278 & 0.261 & 0.226 \\
+\textbf{Small judge} & 0.244 & 0.261 & 0.128 & 0.210 & 0.210 & 0.183 \\
+\textbf{Large judge} & 0.506 & 0.621 & 0.417 & 0.452 & 0.499 & 0.434 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Average human Spearman correlation with 95\% bootstrap confidence intervals (1000 resamples over the evaluation records).}
+\label{tab:bootstrap}
+\begin{tabular}{lcc}
+\toprule
+Method & Avg.\ Spearman & 95\% CI \\
+\midrule
+ROUGE-1 & 0.204 & [0.156, 0.251] \\
+ROUGE-2 & 0.148 & [0.094, 0.195] \\
+ROUGE-L & 0.168 & [0.120, 0.216] \\
+BERTScore-F & 0.231 & [0.185, 0.281] \\
+Zero-shot & 0.261 & [0.212, 0.311] \\
+Small judge & 0.210 & [0.171, 0.250] \\
+Large judge & 0.499 & [0.459, 0.536] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Agreement between the small and large judge per dimension: Pearson correlation, mean signed difference (small$-$large; negative means the small judge is stricter) and mean absolute difference.}
+\label{tab:agreement}
+\begin{tabular}{lccc}
+\toprule
+Dimension & Pearson & Mean diff. & Mean abs.\ diff. \\
+\midrule
+Faithfulness & 0.337 & -2.473 & 2.527 \\
+Coherence & 0.194 & -1.653 & 1.767 \\
+Relevance & 0.232 & -0.762 & 1.046 \\
+Fluency & 0.208 & -1.294 & 1.413 \\
+Overall & 0.221 & -1.546 & 1.688 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Cost and speed of the model-based methods on the evaluation subset.}
+\label{tab:cost}
+\begin{tabular}{lccccc}
+\toprule
+Method & $N$ & Tok./summ. & Lat.\ (s) & Summ./min & Monetary \\
+\midrule
+Zero-shot (local) & 800 & 615 & 0.85 & 70.1 & \$0 (local GPU) \\
+Small judge (local) & 800 & 1122 & 6.20 & 9.7 & \$0 (local GPU) \\
+Large judge (Gemini) & 800 & 931 & 1.10 & 54.6 & $\sim$\$0.40 \\
+\bottomrule
+\end{tabular}
+\end{table}
