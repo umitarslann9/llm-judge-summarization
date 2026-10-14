@@ -42,7 +42,7 @@ matplotlib>=3.9.0         # cost / quality trade-off plots in results/
 
 # ---- Notes --------------------------------------------------
 # * The small judge needs a running Ollama server + the model pulled:
-#     ollama pull qwen2.5:3b-instruct
+#     ollama pull qwen2.5:3b
 # * The large judge needs a (free) Gemini API key in GEMINI_API_KEY.
 # * bert-score downloads its encoder model on first run (one-time delay).
 # * No API key goes in this file or in config.yaml - keys come from

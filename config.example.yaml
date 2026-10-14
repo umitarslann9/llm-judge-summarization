@@ -3,13 +3,17 @@
 # env var named in api_key_env (or a local .env).
 
 large_judge:
-  provider: groq                   # groq | gemini
-  model: llama-3.3-70b-versatile   # large open judge (70B) served by Groq
-  base_url: https://api.groq.com/openai/v1
-  api_key_env: GROQ_API_KEY        # key read from this environment variable
+  provider: gemini                 # gemini | groq
+  model: gemini-2.5-flash          # large proprietary judge (the configuration used for the paper)
+  api_key_env: GEMINI_API_KEY      # key read from this environment variable / .env
   temperature: 0.0
-  rpm_limit: 25                    # stay under the Groq free-tier requests/min
+  rpm_limit: 25                    # client-side requests-per-minute cap; lower it if you hit 429s on the free tier
   max_output_tokens: 512
+  # Free alternative - Llama-3.3-70B served by Groq:
+  #   provider: groq
+  #   model: llama-3.3-70b-versatile
+  #   base_url: https://api.groq.com/openai/v1
+  #   api_key_env: GROQ_API_KEY
 
 small_judge:
   backend: ollama                  # local open model served by Ollama
